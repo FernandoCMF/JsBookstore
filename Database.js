@@ -29,12 +29,12 @@ module.exports = class Database {
 
   addBooksToStock(bookName, quantity){
     const book = this.findBookByName(bookName)
-    book?.addToStock(quantity)
+    book.addToStock(quantity)
   }
 
   removeBooksFromStock(bookName, quantity){
     const book = this.findBookByName(bookName)
-    book?.removeFromStock(quantity)
+    book.removeFromStock(quantity)
   }
 
   // Posters
@@ -52,12 +52,12 @@ module.exports = class Database {
 
   addPostersToStock(posterName, quantity){
     const poster = this.findPosterByName(posterName)
-    poster?.addToStock(quantity)
+    poster.addToStock(quantity)
   }
 
   removePostersFromStock(posterName, quantity){
     const poster = this.findPosterByName(posterName)
-    poster?.removeFromStock(quantity)
+    poster.removeFromStock(quantity)
   }
 
   saveUser(user){

@@ -8,21 +8,21 @@ const User = require("./entities/User")
 module.exports = class App {
   static #database = new Database()
 
-  createUser(name, email, password){
+  createUser(name, email, password) {
     const user = new User(name, email, password)
     App.#database.saveUser(user)
   }
 
-  getUsers(){
+  getUsers() {
     return App.#database.find('users')
   }
 
-  createAuthor(name, nationality, bio){
+  createAuthor(name, nationality, bio) {
     const author = new Author(name, nationality, bio)
     App.#database.saveAuthor(author)
   }
 
-  getAuthors(){
+  getAuthors() {
     return App.#database.find('authors')
   }
 
@@ -31,44 +31,44 @@ module.exports = class App {
     App.#database.saveBook(book)
   }
 
-  addBook(bookName, quantity){
+  addBook(bookName, quantity) {
     App.#database.addBooksToStock(bookName, quantity)
   }
 
-  getBooks(){
+  getBooks() {
     return App.#database.find('books')
   }
 
-  createPoster(name, description, height, width, price,inStock){
+  createPoster(name, description, height, width, price, inStock) {
     const poster = new Poster(name, description, height, width, price, inStock)
     App.#database.savePoster(poster)
   }
 
-  addPoster(posterName, quantity){
+  addPoster(posterName, quantity) {
     App.#database.addPostersToStock(posterName, quantity)
   }
 
-  getPosters(){
+  getPosters() {
     return App.#database.find('posters')
   }
 
-  createOrder(items, user){
+  createOrder(items, user) {
     const order = new Order(items, user)
     App.#database.saveOrder(order)
-    order.data.items.forEach(({product, quantity}) => {
-      if(product instanceof Book){
+    order.data.items.forEach(({ product, quantity }) => {
+      if (product instanceof Book) {
         App.#database.removeBooksFromStock(product.name, quantity)
-      }else if(product instanceof Poster){
+      } else if (product instanceof Poster) {
         App.#database.removePostersFromStock(product.name, quantity)
       }
     })
   }
 
-  getOrders(){
+  getOrders() {
     return App.#database.find('orders')
   }
 
-  showDataBase(){
+  showDatabase() {
     App.#database.showStorage()
   }
 }
